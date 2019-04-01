@@ -1,9 +1,9 @@
-# Core v2 Management Tool - Ark Mainnet (yarn pkg install)
+# Core v2 Management Tool - Phantom Mainnet (yarn pkg install)
 
 ## Installation
 
 ```sh
-git clone https://github.com/geopsllc/core-control
+git clone https://github.com/PhantomChain/core-control
 cd core-control
 ./ccontrol.sh arg1 [arg2]
 ```
@@ -31,7 +31,7 @@ This is a Streamlined CLI-Based Core v2 Management Tool.
 - For update you can skip the 'check' argument as it's the default.
 - For system you can skip the 'info' argument as it's the default.
 - When setting a delegate secret just paste your secret after the 'set' argument without quotes.
-- The snapshot is stored in the 'snapshots' folder in your home directory using the database name, e.g. ark_mainnet. 
+- The snapshot is stored in the 'snapshots' folder in your home directory using the database name, e.g. phantom_mainnet. 
 If you're using an external snapshot make sure to rename it accordingly and put it in the 'snapshots' folder.
 - Running with the 'remove' argument does not delete the 'snapshots' folder or the stored snapshot in order to allow you
 to take a snapshot, do remove/install and restore it afterwards.

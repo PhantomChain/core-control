@@ -2,6 +2,9 @@
 
 wrong_arguments () {
 
+
+
+
   echo -e "\nMissing: arg1 [arg2]\n"
   echo -e " ----------------------------------------------------------------------"
   echo -e "| arg1     | arg2                 | Description                        |"
@@ -66,7 +69,7 @@ setefile () {
   echo "CORE_LOG_LEVEL=$log_level" >> "$envFile" 2>&1
   echo "CORE_DB_HOST=localhost" >> "$envFile" 2>&1
   echo "CORE_DB_PORT=5432" >> "$envFile" 2>&1
-  echo "CORE_DB_USERNAME=$USER" >> "$envFile" 2>&1
+  echo "CORE_DB_USERNAME=phantom" >> "$envFile" 2>&1
   echo "CORE_DB_PASSWORD=password" >> "$envFile" 2>&1
   echo "CORE_DB_DATABASE=${name}_$network" >> "$envFile" 2>&1
   echo "CORE_P2P_HOST=0.0.0.0" >> "$envFile" 2>&1
@@ -103,7 +106,8 @@ start () {
       echo -e "\n${red}Process forger already running. Skipping...${nc}"
     fi
 
-    local rstatus=$(pm2status "${name}-relay" | awk '{print $13}')
+    local rstatus=$(pm2 status "${name}-relay" | awk '{print $13}')
+    echo ${rstatus};
 
     if [ "$rstatus" != "online" ]; then
       echo -e "\n${red}Process startup failed.${nc}"
@@ -121,10 +125,20 @@ start () {
       echo -e "\n${red}Process $1 already running. Skipping...${nc}"
     fi
 
-    local pstatus=$(pm2status "${name}-$1" | awk '{print $13}')
+    local pstatus=$(pm2 status phantom-relay | grep online)
 
-    if [[ "$pstatus" != "online" && "$1" = "relay" ]]; then
+    if [[ "$pstatus" = "" ]]; then
+      echo ${pstatus}
       echo -e "\n${red}Process startup failed.${nc}"
+    else 
+      echo -E  "  _____  _                 _                                         ___    ___"
+      echo -E  " |  __ \| |               | |                                       |__ \  / _ \ "
+      echo -E  " | |__) | |__   __ _ _ __ | |_ ___  _ __ ___     ___ ___  _ __ ___     ) || | | |"
+      echo -E  " |  ___/| |_ \ / _  |  _ \| __/ _ \|  _  _   \  / __/ _ \|  __/ _ \   / / | | | |"
+      echo -E  " | |    | | | | (_| | | | | || (_) | | | | | | | (_| (_) | | |  __/  / /_ | |_| |"
+      echo -E  " |_|    |_| |_|\__,_|_| |_|\__\___/|_| |_| |_|  \___\___/|_|  \___| |____(_)___/"
+      echo -E ""
+      echo -e "\b${green}Phantom Network Was Started"
     fi
 
   fi
